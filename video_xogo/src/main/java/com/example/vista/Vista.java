@@ -23,7 +23,7 @@ public class Vista {
         controlador.addXogador("Partida", "Mario", "Space Invaders", 250, 4, 1);
         controlador.addXogador("Partida", "Mario", "Space Invaders", 9999, 60, 20);*/
 
-        mostrarDatos(controlador.puntuacionTotalXogador("Partida", "Mario")); 
+        mostrarDatos(controlador.puntuacionTotalXogador("Partida")); 
         mostrarDatos(controlador.puntuacionMax(null));
         
     }
