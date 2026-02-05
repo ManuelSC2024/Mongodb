@@ -1,0 +1,9 @@
+[
+{"sensorid": 1,"ts": new Date(2026,2,22),"tipo": "temp","valor": 12,"ubicacion": "A coruña"},
+
+{"sensorid": 2,"ts": new Date(2026,2,21),"tipo": "hum", "valor": 25,"ubicacion": "A coruña"},
+
+{"sensorid": 3,"ts": new Date(2026,2,20),"tipo": "temo", "valor": 20,"ubicacion": "A coruña"}
+
+
+]
