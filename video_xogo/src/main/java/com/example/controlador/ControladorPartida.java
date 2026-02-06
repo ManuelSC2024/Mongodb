@@ -9,6 +9,7 @@ import org.bson.conversions.Bson;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Accumulators;
 import com.mongodb.client.model.Aggregates;
+import com.mongodb.client.model.Projections;
 
 public class ControladorPartida {
     /**
@@ -153,10 +154,12 @@ public class ControladorPartida {
         try (MongoProvider provider = new MongoProvider()) {
             MongoCollection<Document> collection = provider.getCollection(nCollection);
 
-            collection.find().projection(new Document("xogador", 1)
-                    .append("xogo", 1)
-                    .append("puntuacion", 1)
-                    .append("_id", 0)).into(lista);
+            List<Bson> pipeline = List.of(
+                    Aggregates.project(Projections.fields(
+                            Projections.exclude(),
+                            Projections.include("xogador", "xogo", "puntuacion"))));
+
+            collection.aggregate(pipeline).into(lista);
 
         } catch (Exception e) {
             System.out.println("Error al mostrar el xogador, xogo e a puntuacion: " + e.getMessage());
@@ -177,7 +180,7 @@ public class ControladorPartida {
         try (MongoProvider provider = new MongoProvider()) {
             MongoCollection<Document> collection = provider.getCollection(nCollection);
 
-            List<Bson> pipelline = List.of(Aggregates.group("$xogador",
+            List<Bson> pipelline = List.of(Aggregates.group("$xogo",
                     Accumulators.avg("puntuacionMedia", "$puntuacion")),
                     Aggregates.sort(new Document("puntuacionMedia", -1)));
 
