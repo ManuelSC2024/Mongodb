@@ -55,21 +55,90 @@ public class ControladorPartida {
         return lista;
     }
 
-    public ArrayList<Document> puntuacionMax(String nColeccion){
+    public ArrayList<Document> puntuacionMax(String nColeccion) {
         ArrayList<Document> lista = new ArrayList<>();
+
         try (MongoProvider provider = new MongoProvider()) {
             MongoCollection<Document> collection = provider.getCollection(nColeccion);
 
             List<Bson> pipeline = List.of(
-                Aggregates.group("$xogador", Accumulators.max("maxPuntuacion", "$puntuacion"))
-            );
+                    Aggregates.group("$xogador", Accumulators.max("maxPuntuacion", "$puntuacion")));
 
-
+            collection.aggregate(pipeline).into(lista);
         } catch (Exception e) {
-            // TODO: handle exception
+            System.out.println("Error al mostrar la puntuacion maxima de los xogadores: " + e.getMessage());
         }
-        
         return lista;
     }
 
+    public ArrayList<Document> partidaMaisCurta(String nColeccion) {
+        ArrayList<Document> lista = new ArrayList<>();
+
+        try (MongoProvider provider = new MongoProvider()) {
+            MongoCollection<Document> collection = provider.getCollection(nColeccion);
+
+            List<Bson> pipeline = List.of(
+                    Aggregates.group("$xogador", Accumulators.min("duracionMinima", "$duracion")));
+
+            collection.aggregate(pipeline).into(lista);
+        } catch (Exception e) {
+            System.out.println("Error al mostrar la partida mas corta del xogador: " + e.getMessage());
+        }
+
+        return lista;
+    }
+
+    public ArrayList<Document> rankingXogadores(String nCollection) {
+        ArrayList<Document> lista = new ArrayList<>();
+
+        try (MongoProvider provider = new MongoProvider()) {
+            MongoCollection<Document> collection = provider.getCollection(nCollection);
+
+            List<Bson> pipeline = List.of(Aggregates.group("$xogador",
+                    Accumulators.sum("puntuacionMaxima", "$puntuacion")),
+                    Aggregates.sort(new Document("puntuacionMaxima", -1)));
+
+            collection.aggregate(pipeline).into(lista);
+        } catch (Exception e) {
+            System.out.println("Error al mostrar el ranking: " + e.getMessage());
+        }
+
+        return lista;
+    }
+
+    public ArrayList<Document> listarPartidas(String nCollection) {
+        ArrayList<Document> lista = new ArrayList<>();
+
+        try (MongoProvider provider = new MongoProvider()) {
+            MongoCollection<Document> collection = provider.getCollection(nCollection);
+
+            collection.find().projection(new Document("xogador", 1)
+                    .append("xogo", 1)
+                    .append("puntuacion", 1)
+                    .append("_id", 0)).into(lista);
+
+        } catch (Exception e) {
+            System.out.println("Error al mostrar el xogador, xogo e a puntuacion: " + e.getMessage());
+        }
+
+        return lista;
+    }
+
+    public ArrayList<Document> puntuacionMedia(String nCollection) {
+        ArrayList<Document> lista = new ArrayList<>();
+
+        try (MongoProvider provider = new MongoProvider()) {
+            MongoCollection<Document> collection = provider.getCollection(nCollection);
+
+            List<Bson> pipelline = List.of(Aggregates.group("$xogador",
+                    Accumulators.avg("puntuacionMedia", "$puntuacion")),
+                    Aggregates.sort(new Document("puntuacionMedia", -1)));
+
+            collection.aggregate(pipelline).into(lista);
+        } catch (Exception e) {
+            System.out.println("Error al mostrar la media: " + e.getMessage());
+        }
+
+        return lista;
+    }
 }
