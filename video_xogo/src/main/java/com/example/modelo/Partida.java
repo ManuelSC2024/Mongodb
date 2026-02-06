@@ -7,6 +7,16 @@ public class Partida {
     private int duracion;
     private int nivel;
 
+    /**
+     * Crea un objeto Partida
+     * 
+     * @param nColeccion nombre de la colección
+     * @param xogador    nombre del jugador
+     * @param xogo       nombre del juego
+     * @param puntuacion puntuación alcanzada por el jugador
+     * @param duracion   tiempo total de la partida
+     * @param nivel      nivel alcanzado en la partida
+     */
     public Partida(String xogador, String xogo, int puntuacion, int duracion, int nivel) {
         this.xogador = xogador;
         this.xogo = xogo;

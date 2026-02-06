@@ -10,6 +10,10 @@ public class Vista {
 
     private final Controlador controlador = new Controlador();
 
+    /**
+     * Muestra los datos de la partida por consola
+     * @param lista
+     */
     private void mostrarDatos(ArrayList<Document> lista) {
         for (Document partida : lista) {
             System.out.println(partida);
