@@ -17,20 +17,20 @@ public class Vista {
     }
 
     public Vista() {
-        controlador.addXogador("Partida", "Mario", "Space Invaders", 1200, 15, 3);
-        controlador.addXogador("Partida", "Mario", "Space Invaders", 1500, 18, 4);
-        controlador.addXogador("Partida", "Mario", "Space Invaders", 250, 4, 1);
-        controlador.addXogador("Partida", "Mario", "Space Invaders", 9999, 60, 20);
+        controlador.addPartida("Partida", "Mario", "Space Invaders", 1200, 15, 3);
+        controlador.addPartida("Partida", "Mario", "Space Invaders", 1500, 18, 4);
+        controlador.addPartida("Partida", "Mario", "Space Invaders", 250, 4, 1);
+        controlador.addPartida("Partida", "Mario", "Space Invaders", 9999, 60, 20);
 
-        controlador.addXogador("Partida", "Luigi", "Space Invaders", 1300, 16, 4);
-        controlador.addXogador("Partida", "Luigi", "Space Invaders", 1500, 12, 5);
-        controlador.addXogador("Partida", "Luigi", "Space Invaders", 250, 4, 1);
-        controlador.addXogador("Partida", "Luigi", "Space Invaders", 15, 1, 1);
+        controlador.addPartida("Partida", "Luigi", "Space Invaders", 1300, 16, 4);
+        controlador.addPartida("Partida", "Luigi", "Space Invaders", 1500, 12, 5);
+        controlador.addPartida("Partida", "Luigi", "Space Invaders", 250, 4, 1);
+        controlador.addPartida("Partida", "Luigi", "Space Invaders", 15, 1, 1);
 
-        controlador.addXogador("Partida", "Peach", "Space Invaders", 999, 13, 2);
-        controlador.addXogador("Partida", "Peach", "Space Invaders", 1500, 12, 5);
-        controlador.addXogador("Partida", "Peach", "Space Invaders", 2500, 20, 6);
-        controlador.addXogador("Partida", "Peach", "Space Invaders", 2100, 17, 6);
+        controlador.addPartida("Partida", "Peach", "Space Invaders", 999, 13, 2);
+        controlador.addPartida("Partida", "Peach", "Space Invaders", 1500, 12, 5);
+        controlador.addPartida("Partida", "Peach", "Space Invaders", 2500, 20, 6);
+        controlador.addPartida("Partida", "Peach", "Space Invaders", 2100, 17, 6);
 
         mostrarDatos(controlador.puntuacionTotalXogador("Partida")); 
         mostrarDatos(controlador.puntuacionMax("Partida"));
